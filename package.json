@@ -1,32 +1,30 @@
 {
-  "name": "npm-template",
-  "version": "1.1.2",
-  "description": "A template repo for npm packages",
-  "keywords": [],
+  "name": "@aegisjsproject/firebase-account-routes",
+  "version": "0.0.1",
+  "description": "Firebase account and authentication route modules for `@aegisjsproject/router`",
+  "keywords": [
+    "firebase",
+    "authentication",
+    "account"
+  ],
   "type": "module",
-  "main": "./index.cjs",
-  "module": "./index.js",
-  "unpkg": "./index.min.js",
+  "module": "./main.js",
+  "unpkg": "./main.js",
   "exports": {
     ".": {
-      "import": "./index.js",
-      "require": "./index.cjs"
+      "import": "./main.js"
     },
     "./*.js": {
-      "import": "./*.js",
-      "require": "./*.cjs"
+      "import": "./*.js"
     },
     "./*.mjs": {
-      "import": "./*.js",
-      "require": "./*.cjs"
+      "import": "./*.js"
     },
     "./*.cjs": {
-      "import": "./*.js",
-      "require": "./*.cjs"
+      "import": "./*.js"
     },
     "./*": {
-      "import": "./*.js",
-      "require": "./*.cjs"
+      "import": "./*.js"
     }
   },
   "engines": {
@@ -35,14 +33,12 @@
   "private": false,
   "scripts": {
     "test": "npm run lint:js && npm run run:tests",
-    "preversion": "npm test && npm run build",
-    "prepare": "npm test && npm run build",
+    "start": "npx @shgysk8zer0/http-server -c ./http.config.js",
+    "preversion": "npm test && npm run build --if-present",
+    "prepare": "npm test && npm run build --if-present",
     "lint:js": "eslint .",
     "fix:js": "eslint . --fix",
-    "build": "npm run build:js",
     "run:tests": "node --test",
-    "clean": "rm -f ./*.cjs",
-    "build:js": "npm run clean && rollup -c rollup.config.js",
     "create:lock": "npm i --package-lock-only --ignore-scripts --no-audit --no-fund",
     "version:bump": "npm run version:bump:patch",
     "version:bump:patch": "npm version --no-git-tag-version patch && npm run create:lock",
@@ -51,7 +47,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shgysk8zer0/npm-template.git"
+    "url": "git+https://github.com/AegisJSProject/firebase-account-routes.git"
   },
   "author": "Chris Zuber <admin@kernvalley.us>",
   "license": "MIT",
@@ -66,14 +62,13 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/shgysk8zer0/npm-template/issues"
+    "url": "https://github.com/AegisJSProject/firebase-account-routes/issues"
   },
-  "homepage": "https://github.com/shgysk8zer0/npm-template#readme",
+  "homepage": "https://github.com/AegisJSProject/firebase-account-routes#readme",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^16.0.2",
-    "@rollup/plugin-terser": "^0.4.4",
     "@shgysk8zer0/eslint-config": "^1.0.4",
-    "eslint": "^9.37.0",
-    "rollup": "^4.52.4"
+    "@shgysk8zer0/http-server": "^1.1.1",
+    "@shgysk8zer0/importmap": "^1.4.82",
+    "eslint": "^9.37.0"
   }
 }
