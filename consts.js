@@ -12,6 +12,13 @@ export const EVENTS = {
 };
 
 export const ROUTES = Object.freeze({
+	account: Object.freeze({
+		title: 'Account Management',
+		description: 'Sign-In or create an account',
+		page: undefined,
+		url: './',
+		module: './pages.js',
+	}),
 	signIn: Object.freeze({
 		title: 'Sign-In',
 		description: 'Access your account or log in to the application.',
@@ -37,6 +44,7 @@ export const ROUTES = Object.freeze({
 		title: 'Reset Password',
 		description: 'Initiate the process to reset your forgotten password.',
 		page: 'reset-password',
+		alias: 'forgot-password',
 		url: './reset-password',
 		module: './reset-password.js',
 	}),

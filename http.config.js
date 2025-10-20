@@ -43,6 +43,7 @@ const rootEl = document.getElementById('root');
 
 initRouter({
 	'/account/:page': '/main.js',
+	'/account/': '/main.js',
 }, {
 	rootEl,
 });
@@ -67,6 +68,7 @@ const doc = `<!DOCTYPE html>
 	<body>
 		<nav id="nav">
 			<a href="/" class="btn btn-link">Home</a>
+			<a href="${getLink(ROUTES.account.url)}" class="btn btn-link">Account</a>
 			<a href="${getLink(ROUTES.signIn.url, { redirect: '/account/profile' })}"class="btn btn-link">${ROUTES.signIn.title}</a>
 			<a href="${getLink(ROUTES.signUp.url)}" class="btn btn-link">${ROUTES.signUp.title}</a>
 			<a href="${getLink(ROUTES.resetPassword.url)}" class="btn btn-link">${ROUTES.resetPassword.title}</a>

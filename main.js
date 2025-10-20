@@ -24,6 +24,9 @@ function _createHandler(req) {
  */
 export default async (req) => {
 	switch(req.params.page) {
+		case ROUTES.account.page:
+			return await import(ROUTES.account.module).then(_createHandler(req));
+
 		case ROUTES.signIn.page:
 			return await import(ROUTES.signIn.module).then(_createHandler(req));
 
@@ -34,6 +37,7 @@ export default async (req) => {
 			return await import(ROUTES.signUp.module).then(_createHandler(req));
 
 		case ROUTES.resetPassword.page:
+		case ROUTES.resetPassword.alias:
 			return await import(ROUTES.resetPassword.module).then(_createHandler(req));
 
 		case ROUTES.verifyEmail.page:
@@ -51,9 +55,12 @@ export default async (req) => {
 };
 
 export const title = ({
-	params: { page = null }
+	params: { page }
 }) => {
 	switch(page) {
+		case ROUTES.account.page:
+			return ROUTES.account.title;
+
 		case ROUTES.signIn.page:
 			return ROUTES.signIn.title;
 
@@ -64,6 +71,7 @@ export const title = ({
 			return ROUTES.signUp.title;
 
 		case ROUTES.resetPassword.page:
+		case ROUTES.resetPassword.alias:
 			return ROUTES.resetPassword.title;
 
 		case ROUTES.verifyEmail.page:
@@ -81,9 +89,12 @@ export const title = ({
 };
 
 export const description = ({
-	params: { page = null }
+	params: { page }
 }) => {
 	switch(page) {
+		case ROUTES.account.page:
+			return ROUTES.account.description;
+
 		case ROUTES.signIn.page:
 			return ROUTES.signIn.description;
 
@@ -94,6 +105,7 @@ export const description = ({
 			return ROUTES.signUp.description;
 
 		case ROUTES.resetPassword.page:
+		case ROUTES.resetPassword.alias:
 			return ROUTES.resetPassword.description;
 
 		case ROUTES.verifyEmail.page:

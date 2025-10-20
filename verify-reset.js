@@ -6,6 +6,7 @@ import { attr } from '@aegisjsproject/core/stringify.js';
 import { registerCallback } from '@aegisjsproject/callback-registry/callbacks.js';
 import { onSubmit, onChange, signal as signalAttr, registerSignal } from '@aegisjsproject/callback-registry/events.js';
 import { navigate } from '@aegisjsproject/router';
+import { ROUTES } from './consts.js';
 // import { ROUTES } from './consts.js';
 
 const ID = 'aegis-firebase-account-verify-reset';
@@ -58,3 +59,6 @@ export default ({ url, signal }) => {
 		</div>
 	</form>`;
 };
+
+export const title = ROUTES.verifyReset.title;
+export const description = ROUTES.verifyReset.description;
