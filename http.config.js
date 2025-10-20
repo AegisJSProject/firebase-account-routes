@@ -71,6 +71,7 @@ const doc = `<!DOCTYPE html>
 			<a href="${getLink(ROUTES.signUp.url)}" class="btn btn-link">${ROUTES.signUp.title}</a>
 			<a href="${getLink(ROUTES.resetPassword.url)}" class="btn btn-link">${ROUTES.resetPassword.title}</a>
 			<a href="${getLink(ROUTES.verifyEmail.url, { oobCode: globalThis.process.env.oobCode })}" class="btn btn-link">Verify</a>
+			<a href="${getLink(ROUTES.signOut.url)}" class="btn btn-danger">Sign Out</a>
 		</nav>
 		<main id="root"></main>
 	</body>
@@ -87,7 +88,7 @@ export default {
 	port: PORT,
 	routes: {
 		'/': () => new Response(doc, { headers }),
-		'/account/': () => new Response(doc, { headers }),
+		'/account/*': () => new Response(doc, { headers }),
 		'/index.js': () => new Response(script, { headers: { 'Content-Type': 'application/javascript' }}),
 		'/creds': () => Response.json({
 			apiKey: globalThis.process?.env?.apiKey,

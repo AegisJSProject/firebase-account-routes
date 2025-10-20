@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.0.2] - 2025-10-20
+
+### Added
+- Add route for sign-out
+
+### Changed
+- Misc minor changes to profile route
+
+
 ### Fixed
 - Update GitHub Release workflow to use [Auto Release](https://github.com/marketplace/actions/auto-release)
 

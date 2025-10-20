@@ -1,6 +1,6 @@
 {
   "name": "@aegisjsproject/firebase-account-routes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Firebase account and authentication route modules for `@aegisjsproject/router`",
   "keywords": [
     "firebase",
