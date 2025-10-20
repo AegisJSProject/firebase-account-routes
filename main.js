@@ -27,6 +27,9 @@ export default async (req) => {
 		case ROUTES.signIn.page:
 			return await import(ROUTES.signIn.module).then(_createHandler(req));
 
+		case ROUTES.signOut.page:
+			return await import(ROUTES.signOut.module).then(_createHandler(req));
+
 		case ROUTES.signUp.page:
 			return await import(ROUTES.signUp.module).then(_createHandler(req));
 
@@ -54,6 +57,9 @@ export const title = ({
 		case ROUTES.signIn.page:
 			return ROUTES.signIn.title;
 
+		case ROUTES.signOut.page:
+			return ROUTES.signOut.title;
+
 		case ROUTES.signUp.page:
 			return ROUTES.signUp.title;
 
@@ -80,6 +86,9 @@ export const description = ({
 	switch(page) {
 		case ROUTES.signIn.page:
 			return ROUTES.signIn.description;
+
+		case ROUTES.signOut.page:
+			return ROUTES.signOut.description;
 
 		case ROUTES.signUp.page:
 			return ROUTES.signUp.description;

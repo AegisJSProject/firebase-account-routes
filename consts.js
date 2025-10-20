@@ -1,5 +1,7 @@
 export const EVENT_TARGET = new EventTarget();
 
+export const signOut = 'aegis:firebase:signout';
+
 export const EVENTS = {
 	signIn: 'aegis:account:sign-in',
 	signUp: 'aegis:account:sign-up',
@@ -9,13 +11,20 @@ export const EVENTS = {
 	verifyReset: 'aegis:account:verify-reset',
 };
 
-export const ROUTES = {
+export const ROUTES = Object.freeze({
 	signIn: Object.freeze({
 		title: 'Sign-In',
 		description: 'Access your account or log in to the application.',
 		page: 'sign-in',
 		url: './sign-in',
 		module: './sign-in.js',
+	}),
+	signOut: Object.freeze({
+		title: 'Sign-Out',
+		description: 'Sign out of the application.',
+		page: 'sign-out',
+		url: './sign-out',
+		module: './sign-out.js',
 	}),
 	signUp: Object.freeze({
 		title: 'Sign-Up',
@@ -52,7 +61,7 @@ export const ROUTES = {
 		url: './profile',
 		module: './profile.js',
 	}),
-};
+});
 
 export const NULL_USER = Object.freeze({
 	uid: null,

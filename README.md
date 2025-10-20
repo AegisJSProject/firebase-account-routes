@@ -1,4 +1,4 @@
-# `@aegisjsproject/router`
+# `@aegisjsproject/firebase-account-routes`
 
 Firebase account and authentication route modules for `@aegisjsproject/router`
 
