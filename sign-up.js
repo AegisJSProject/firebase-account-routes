@@ -84,3 +84,6 @@ export default ({ signal, url }) => {
 		</div>
 	</form>`;
 };
+
+export const title = ROUTES.signUp.title;
+export const description = ROUTES.signUp.description;

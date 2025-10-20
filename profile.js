@@ -28,3 +28,6 @@ export default async function({
 		</div>`;
 	}
 }
+
+export const title = ROUTES.profile.title;
+export const description = ROUTES.profile.description;
