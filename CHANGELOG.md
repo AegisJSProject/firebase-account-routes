@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.0.4] - 2025-10-21
+
+### Fixed
+- Fix sign-in with `PasswordCredential`
+
 ## [v0.0.3] - 2025-10-20
 
 ### Added
