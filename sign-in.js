@@ -12,7 +12,7 @@ export async function autoSignIn({ mediation = 'optional', signal } = {}) {
 	const cred = await getPasswordCredential({ mediation, signal });
 
 	if (typeof cred.id === 'string') {
-		return await login(cred.id, cred.password);
+		return await login({ email: cred.id, password: cred.password });
 	}
 }
 
