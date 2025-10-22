@@ -24,6 +24,7 @@ export default async function({
 			<div>${email}</div>
 			<div>${phoneNumber}</div>
 			<img src="${photoURL}" crossorigin="anonymous" referrerpolicy="no-referrer" alt="${displayName} avatar" loading="lazy" />
+			<a href="${new URL(ROUTES.changePassword.url, url)}" class="btn btn-secondary"><!-- Password Icon -->Change Password</a>
 			<a href="${new URL(ROUTES.signOut.url, url)}" class="btn btn-danger"><!-- Sign-out Icon -->Sign-Out</a>
 		</div>`;
 	}

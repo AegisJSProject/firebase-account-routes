@@ -40,6 +40,13 @@ export const ROUTES = Object.freeze({
 		url: './sign-up',
 		module: './sign-up.js',
 	}),
+	changePassword: Object.freeze({
+		title: 'Change Password',
+		description: 'Change the password for the account.',
+		page: 'change-password',
+		url: './change-password',
+		module: './change-password.js',
+	}),
 	resetPassword: Object.freeze({
 		title: 'Reset Password',
 		description: 'Initiate the process to reset your forgotten password.',
@@ -51,14 +58,14 @@ export const ROUTES = Object.freeze({
 	verifyEmail: Object.freeze({
 		title: 'Verify Email',
 		description: 'Confirm your email address to complete account activation.',
-		page: 'verify-email',
+		mode: 'verifyEmail',
 		url: './verify-email',
 		module: './verify-email.js',
 	}),
 	verifyReset: Object.freeze({
 		title: 'Verify Password Reset',
 		description: 'Complete the final step of changing your password using a verification link.',
-		page: 'verify-reset',
+		mode: 'resetPassword',
 		url: './verify-reset',
 		module: './verify-reset.js',
 	}),

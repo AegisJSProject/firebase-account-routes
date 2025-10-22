@@ -97,6 +97,7 @@ export async function login({
 	const auth = await getFirebaseAuth();
 	const { signInWithEmailAndPassword } = await import('firebase/auth');
 	const { user } = await signInWithEmailAndPassword(auth, email, password);
+
 	return user;
 }
 
@@ -183,6 +184,38 @@ export async function getCurrentUser() {
 	const auth = await getFirebaseAuth();
 
 	return getAuthUser(auth);
+}
+
+export async function getIdToken() {
+	const user = await getCurrentUser();
+
+	if (user === NULL_USER) {
+		return null;
+	} else {
+		return user.getIdToken();
+	}
+}
+
+export async function addAuthHeader(req) {
+	if (req instanceof Headers) {
+		const token = await getIdToken();
+
+		if (typeof token === 'string') {
+			req.set('Authorization', `Bearer ${token}`);
+		}
+
+		return req;
+	} else if (req instanceof Request) {
+		const token = await getIdToken();
+
+		if (typeof token === 'string') {
+			req.headers.set('Authorization', `Bearer ${token}`);
+		}
+
+		return req;
+	} else {
+		throw new TypeError('Can only add Auth header to a `Request` or `Headers` object.');
+	}
 }
 
 export async function isLoggedIn() {

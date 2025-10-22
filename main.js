@@ -16,6 +16,7 @@ function _createHandler(req) {
 
 /**
  * @param {object} req
+ * @param {URL} req.url
  * @param {object} req.matches The `matches` from `URLPattern`
  * @param {object} req.params Simplified version from `req.matches`
  * @param {object} req.state Taken from `history.state`
@@ -23,101 +24,133 @@ function _createHandler(req) {
  * @param {AbortSignal} req.signal An `AbortSignal` that aborts when the page is navigated away from
  */
 export default async (req) => {
-	switch(req.params.page) {
-		case ROUTES.account.page:
-			return await import(ROUTES.account.module).then(_createHandler(req));
+	if (req.url.searchParams.has('mode')) {
+		switch(req.url.searchParams.get('mode')) {
+			case ROUTES.verifyEmail.mode:
+				return await import(ROUTES.verifyEmail.module).then(_createHandler(req));
 
-		case ROUTES.signIn.page:
-			return await import(ROUTES.signIn.module).then(_createHandler(req));
+			case ROUTES.verifyReset.mode:
+				return await import(ROUTES.verifyReset.module).then(_createHandler(req));
 
-		case ROUTES.signOut.page:
-			return await import(ROUTES.signOut.module).then(_createHandler(req));
+			default:
+				throw new Error(`Unknown Action/Mode "${req.url.searchParams.get('mode')}".`);
+		}
+	} else {
+		switch(req.params.page) {
+			case ROUTES.account.page:
+				return await import(ROUTES.account.module).then(_createHandler(req));
 
-		case ROUTES.signUp.page:
-			return await import(ROUTES.signUp.module).then(_createHandler(req));
+			case ROUTES.signIn.page:
+				return await import(ROUTES.signIn.module).then(_createHandler(req));
 
-		case ROUTES.resetPassword.page:
-		case ROUTES.resetPassword.alias:
-			return await import(ROUTES.resetPassword.module).then(_createHandler(req));
+			case ROUTES.signOut.page:
+				return await import(ROUTES.signOut.module).then(_createHandler(req));
 
-		case ROUTES.verifyEmail.page:
-			return await import(ROUTES.verifyEmail.module).then(_createHandler(req));
+			case ROUTES.signUp.page:
+				return await import(ROUTES.signUp.module).then(_createHandler(req));
 
-		case ROUTES.verifyReset.page:
-			return await import(ROUTES.verifyReset.module).then(_createHandler(req));
+			case ROUTES.changePassword.page:
+				return await import(ROUTES.changePassword.module).then(_createHandler(req));
 
-		case ROUTES.profile.page:
-			return await import(ROUTES.profile.module).then(_createHandler(req));
+			case ROUTES.resetPassword.page:
+			case ROUTES.resetPassword.alias:
+				return await import(ROUTES.resetPassword.module).then(_createHandler(req));
 
-		default:
-			throw new Error(`No handler exists for "${req.params.page}".`);
+			case ROUTES.profile.page:
+				return await import(ROUTES.profile.module).then(_createHandler(req));
+
+			default:
+				throw new Error(`No handler exists for "${req.params.page}".`);
+		}
 	}
 };
 
 export const title = ({
-	params: { page }
+	params: { page },
+	url,
 }) => {
-	switch(page) {
-		case ROUTES.account.page:
-			return ROUTES.account.title;
+	if (url.searchParams.has('mode')) {
+		switch(url.searchParams.get('mode')) {
+			case ROUTES.verifyEmail.mode:
+				return ROUTES.verifyEmail.title;
 
-		case ROUTES.signIn.page:
-			return ROUTES.signIn.title;
+			case ROUTES.verifyReset.mode:
+				return ROUTES.verifyReset.title;
 
-		case ROUTES.signOut.page:
-			return ROUTES.signOut.title;
+			default:
+				throw new Error(`Unknown Action/Mode "${url.searchParams.get('mode')}".`);
+		}
+	} else {
+		switch(page) {
+			case ROUTES.account.page:
+				return ROUTES.account.title;
 
-		case ROUTES.signUp.page:
-			return ROUTES.signUp.title;
+			case ROUTES.signIn.page:
+				return ROUTES.signIn.title;
 
-		case ROUTES.resetPassword.page:
-		case ROUTES.resetPassword.alias:
-			return ROUTES.resetPassword.title;
+			case ROUTES.signOut.page:
+				return ROUTES.signOut.title;
 
-		case ROUTES.verifyEmail.page:
-			return ROUTES.verifyEmail.title;
+			case ROUTES.signUp.page:
+				return ROUTES.signUp.title;
 
-		case ROUTES.verifyReset.page:
-			return ROUTES.verifyReset.title;
+			case ROUTES.changePassword.page:
+				return ROUTES.changePassword.title;
 
-		case ROUTES.profile.page:
-			return ROUTES.profile.title;
+			case ROUTES.resetPassword.page:
+			case ROUTES.resetPassword.alias:
+				return ROUTES.resetPassword.title;
 
-		default:
-			return 'Not Found';
+			case ROUTES.profile.page:
+				return ROUTES.profile.title;
+
+			default:
+				return 'Not Found';
+		}
 	}
 };
 
 export const description = ({
-	params: { page }
+	params: { page },
+	url,
 }) => {
-	switch(page) {
-		case ROUTES.account.page:
-			return ROUTES.account.description;
+	if (url.searchParams.has('mode')) {
+		switch(url.searchParams.get('mode')) {
+			case ROUTES.verifyEmail.mode:
+				return ROUTES.verifyEmail.description;
 
-		case ROUTES.signIn.page:
-			return ROUTES.signIn.description;
+			case ROUTES.verifyReset.mode:
+				return ROUTES.verifyReset.description;
 
-		case ROUTES.signOut.page:
-			return ROUTES.signOut.description;
+			default:
+				throw new Error(`Unknown Action/Mode "${url.searchParams.get('mode')}".`);
+		}
+	} else {
+		switch(page) {
+			case ROUTES.account.page:
+				return ROUTES.account.description;
 
-		case ROUTES.signUp.page:
-			return ROUTES.signUp.description;
+			case ROUTES.signIn.page:
+				return ROUTES.signIn.description;
 
-		case ROUTES.resetPassword.page:
-		case ROUTES.resetPassword.alias:
-			return ROUTES.resetPassword.description;
+			case ROUTES.signOut.page:
+				return ROUTES.signOut.description;
 
-		case ROUTES.verifyEmail.page:
-			return ROUTES.verifyEmail.description;
+			case ROUTES.signUp.page:
+				return ROUTES.signUp.description;
 
-		case ROUTES.verifyReset.page:
-			return ROUTES.verifyReset.description;
+			case ROUTES.changePassword.page:
+				return ROUTES.changePassword.description;
 
-		case ROUTES.profile.page:
-			return ROUTES.profile.description;
+			case ROUTES.resetPassword.page:
+			case ROUTES.resetPassword.alias:
+				return ROUTES.resetPassword.description;
 
-		default:
-			return 'Page Not Found';
+			case ROUTES.profile.page:
+				return ROUTES.profile.description;
+
+			default:
+				return 'Page Not Found';
+		}
 	}
 };

@@ -47,7 +47,7 @@ export default ({ url, signal }) => {
 		<fieldset class="no-border">
 			<div class="form-group">
 				<label for="${ID}-odbcode" class="input-label required">Reset Code</label>
-				<input type="text" name="odbcode" id="${ID}-odbcode" class="input" placeholder="abc123" minlength="54" ${attr({ value: searchParams.get('odbCode') })} required="" />
+				<input type="text" name="odbcode" id="${ID}-odbcode" class="input" placeholder="abc123" minlength="54" ${attr({ value: searchParams.get('oobCode') })} required="" />
 			</div>
 			<div class="form-group">
 				<label for="${ID}-password" class="input-label required">New Password</label>
