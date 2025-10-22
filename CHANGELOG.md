@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.0.5] - 2025-10-22
+
+### Added
+- Add functions to get ID token and add Authorization header
+- Add route to change password for logged in users
+
+### Fixed
+- Fix handling of email verification and password reset using `mode=action` in URLs
+
 ## [v0.0.4] - 2025-10-21
 
 ### Fixed

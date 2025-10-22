@@ -73,6 +73,7 @@ const doc = `<!DOCTYPE html>
 			<a href="${getLink(ROUTES.signUp.url)}" class="btn btn-link">${ROUTES.signUp.title}</a>
 			<a href="${getLink(ROUTES.resetPassword.url)}" class="btn btn-link">${ROUTES.resetPassword.title}</a>
 			<a href="${getLink(ROUTES.verifyEmail.url, { oobCode: globalThis.process.env.oobCode })}" class="btn btn-link">Verify</a>
+			<a href="${getLink(ROUTES.changePassword.url)}" class="btn btn-secondary">Change Password</a>
 			<a href="${getLink(ROUTES.signOut.url)}" class="btn btn-danger">Sign Out</a>
 		</nav>
 		<main id="root"></main>
