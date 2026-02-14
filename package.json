@@ -69,6 +69,6 @@
     "@shgysk8zer0/eslint-config": "^1.0.4",
     "@shgysk8zer0/http-server": "^1.1.1",
     "@shgysk8zer0/importmap": "^1.4.82",
-    "eslint": "^9.37.0"
+    "eslint": "^10.0.0"
   }
 }
