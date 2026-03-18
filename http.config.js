@@ -1,15 +1,18 @@
 import '@shgysk8zer0/polyfills';
-import { imports } from'@shgysk8zer0/importmap';
+import { Importmap } from'@shgysk8zer0/importmap';
 import { ROUTES } from './consts.js';
+import pkg from './package.json' with { type: 'json' };
 
+const importmap = new Importmap();
 const HOSTNAME = 'localhost';
 const PORT = 4040;
 const BASE = '/account/';
 const url = `http://${HOSTNAME}:${PORT}${BASE}`;
 const STYLES = ['properties', 'reset', 'theme', 'button', 'forms', 'misc', 'scrollbar'];
 const NONCE = crypto.randomUUID();
+await importmap.importLocalPackage();
 
-const style = sheet => `<link rel="stylesheet" href="https://unpkg.com/@aegisjsproject/styles@0.2.7/css/${sheet}.css" crossorigin="anonymous" referrerpolicy="no-referrer" nonce="${NONCE}" />`;
+const style = sheet => `<link rel="stylesheet" href="${importmap.resolve(`@aegisjsproject/styles/css/${sheet}.css`)}" crossorigin="anonymous" referrerpolicy="no-referrer" nonce="${NONCE}" />`;
 
 const favicon = 'data:image/svg+xml;base64,' + new TextEncoder().encode(`<svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
 	<rect fill="#${crypto.getRandomValues(new Uint8Array(3)).toHex()}" width="16" height="16" x="0" y="0" rx="1" ry="1"></rect>
@@ -32,14 +35,46 @@ const sri = async str => {
 	return 'sha256-' + new Uint8Array(hash).toBase64({ alphabet: 'base64' });
 };
 
-const importmap = JSON.stringify({ imports });
-const importmapHash = await sri(importmap);
+const importmapHash = await importmap.getIntegrity();
 
 const script = `import '@shgysk8zer0/polyfills';
 import { init as initRouter } from '@aegisjsproject/router';
 import { initializeFirebaseApp } from '/auth.js';
 import { observeEvents } from '@aegisjsproject/callback-registry/events.js';
+import { $user, $isLoggedIn, $displayName, $email, $photoURL, $uid, $authInitialized } from '@aegisjsproject/firebase-account-routes';
+import { Signal } from '@shgysk8zer0/signals';
 const rootEl = document.getElementById('root');
+
+let notifying = false;
+const watcher = new Signal.subtle.Watcher(() => {
+	if (! notifying) {
+		notifying = true;
+		queueMicrotask(() => {
+			notifying = false;
+			const pending = watcher.getPending();
+
+			pending.forEach(signal => {
+				console.log(signal, signal.get());
+				watcher.watch(signal);
+			});
+		});
+	}
+});
+
+watcher.watch($user);
+watcher.watch($isLoggedIn);
+watcher.watch($displayName);
+watcher.watch($email);
+watcher.watch($photoURL);
+watcher.watch($uid);
+watcher.watch($authInitialized);
+globalThis.$user = $user;
+globalThis.$isLoggedIn = $isLoggedIn;
+globalThis.$displayName = $displayName;
+globalThis.$email = $email;
+globalThis.$photoURL = $photoURL;
+globalThis.$uid = $uid;
+globalThis.$authInitialized = $authInitialized;
 
 initRouter({
 	'/account/:page': '/main.js',
@@ -55,12 +90,13 @@ fetch('/creds').then(resp => resp.json()).then(initializeFirebaseApp);`;
 const scriptHash = await sri(script);
 
 const doc = `<!DOCTYPE html>
-<html data-theme="dark">
+<html>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="color-scheme" content="light dark" />
-		<script type="importmap" integrity="${importmapHash}">${importmap}</script>
+		<title>${pkg.name}</title>
+		${await importmap.getScript()}
 		<script type="module" integrity="${scriptHash}" src="/index.js">${script}</script>
 		<link rel="icon" href="${favicon}" type="image/svg+xml" sizes="any" />
 		${STYLES.map(style).join('\n')}

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.0.6] - 2026-03-18
+
+### Added
+- Add user/auth state using `Signal.State`/`Signal.Computed`
+
 ## [v0.0.5] - 2025-10-22
 
 ### Added

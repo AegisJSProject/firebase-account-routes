@@ -228,7 +228,7 @@ export async function onStateChanged(callback) {
 	const auth = await getFirebaseAuth();
 	const { onAuthStateChanged } = await import('firebase/auth');
 
-	onAuthStateChanged(auth, callback);
+	return onAuthStateChanged(auth, callback);
 }
 
 export async function whenLoggedIn() {
@@ -270,6 +270,7 @@ export async function isEmailVerified() {
 
 export async function updateProfileData({ displayName, photoURL }) {
 	const auth = await getFirebaseAuth();
+
 	if (isAuthSignedIn(auth)) {
 		const { updateProfile } = await import('firebase/auth');
 		const user = await getCurrentUser();
