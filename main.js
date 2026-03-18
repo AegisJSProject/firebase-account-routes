@@ -1,4 +1,5 @@
 import { ROUTES } from './consts.js';
+export { $user, $isLoggedIn, $uid, $displayName, $email, $photoURL, $authInitialized } from './state.js';
 
 function _createHandler(req) {
 	return async function _handleReq(mod) {

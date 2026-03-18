@@ -1,6 +1,6 @@
 {
   "name": "@aegisjsproject/firebase-account-routes",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Firebase account and authentication route modules for `@aegisjsproject/router`",
   "keywords": [
     "firebase",
@@ -66,9 +66,10 @@
   },
   "homepage": "https://github.com/AegisJSProject/firebase-account-routes#readme",
   "devDependencies": {
-    "@shgysk8zer0/eslint-config": "^1.0.4",
+    "@aegisjsproject/core": "^0.2.34",
+    "@shgysk8zer0/eslint-config": "^1.0.7",
     "@shgysk8zer0/http-server": "^1.1.1",
-    "@shgysk8zer0/importmap": "^1.4.82",
-    "eslint": "^10.0.0"
+    "@shgysk8zer0/importmap": "^1.8.5",
+    "eslint": "^10.0.3"
   }
 }
